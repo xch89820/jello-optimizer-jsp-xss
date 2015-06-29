@@ -5,7 +5,7 @@ var XssJsp  = require('../main.js');
 
 var xss = new XssJsp();
 // render
-var filePath = path.resolve(__dirname, 'test.jsp');
+var filePath = path.resolve(__dirname, 'aa.jsp');
 var content = fs.readFileSync(filePath);
 
 parser(content.toString())

@@ -3,6 +3,7 @@ var htmlparser = require('htmlparser'),
 
 htmlparser.DefaultHandler._emptyTags['%@'] = 1;
 htmlparser.DefaultHandler._emptyTags['%--'] = 1;
+htmlparser.DefaultHandler._emptyTags['%@page'] = 1;
 
 var promiseParser = Promise.method(function(content, options){
     return new Promise(function(resolve, reject) {
