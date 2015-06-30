@@ -26,7 +26,7 @@ XssJsp.prototype.renderNode = function(node){
             content = handlers.comment(node);
             break;
         default:
-            content = '';
+            content = handlers.directive(node);
             break;
     }
 

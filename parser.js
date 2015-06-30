@@ -1,9 +1,14 @@
 var htmlparser = require('htmlparser'),
     Promise = require('bluebird');
 
+// Derective filter
+htmlparser.DefaultHandler._emptyTags['<!'] = 1;
 htmlparser.DefaultHandler._emptyTags['%@'] = 1;
 htmlparser.DefaultHandler._emptyTags['%--'] = 1;
+// Derective closet name
 htmlparser.DefaultHandler._emptyTags['%@page'] = 1;
+htmlparser.DefaultHandler._emptyTags['%@include'] = 1;
+htmlparser.DefaultHandler._emptyTags['%@taglib'] = 1;
 
 var promiseParser = Promise.method(function(content, options){
     return new Promise(function(resolve, reject) {

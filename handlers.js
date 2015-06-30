@@ -15,8 +15,6 @@ var escapeText = function(value) {
     //if (/\${fn:escapeXml}/.test(value)) {
     //    return value;
     //}
-
-    console.log(value);
     value = value.replace(/\$\{([^}]*)\}/g, function(_, $1) {
         if ($1.indexOf('escapeXml') > -1) {
             return '${' + $1 + '}';
@@ -30,6 +28,13 @@ var passText = function(value){
     return value;
 };
 
+
+var is_jspTag = function(name){
+    return !!(name.indexOf('%') > -1);
+};
+var is_documentType = function(name){
+    return !!/^!DOCTYPE/.test(name);
+};
 /**
  * Handler tag
  * @param nodeContext
@@ -38,6 +43,15 @@ var passText = function(value){
 handlers.tag =  function(node) {
     if (!node.name){
         return '';
+    }
+
+    var nodeName = node.name,
+        isJspTag = is_jspTag(nodeName),
+        isDocumentType = is_documentType(nodeName);
+
+    // Deal with <% %> <!DOCTYPE ...>
+    if (isJspTag || isDocumentType){
+        return handlers.directive(node);
     }
 
     var end, begin = '<' + node.name;
@@ -84,7 +98,10 @@ handlers.comment = function(node) {
     if (!node.data){
         return '';
     }
-    return '<!-- ' + node.data + ' -->';
+    return '<!--' + node.data + '-->';
+};
+handlers.directive = function(node) {
+    return '<' + (node.raw ? node.raw : node.data) + '>';
 };
 
 module.exports = handlers;

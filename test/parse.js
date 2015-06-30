@@ -5,12 +5,13 @@ var XssJsp  = require('../main.js');
 
 var xss = new XssJsp();
 // render
-var filePath = path.resolve(__dirname, 'aa.jsp');
+var filePath = path.resolve(__dirname, 'example.jsp');
 var content = fs.readFileSync(filePath);
 
 parser(content.toString())
     .then(function(dom){
-        console.log(dom);
-       var res = xss.renderNodes(dom);
-        console.log(res);
+        var res = xss.renderNodes(dom);
+        return res;
+    }).then(function(result){
+        fs.writeFileSync('out.jsp', result);
     });
