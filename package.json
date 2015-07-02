@@ -1,7 +1,7 @@
 {
   "name": "jello-optimizer-jsp-xss",
   "description": "Jello optimizer xss for JSP",
-  "version": "0.0.4",
+  "version": "0.0.1",
   "repository": {
     "type": "git",
     "url": "https://github.com/xch89820/jello-optimizer-jsp-xss.git"
