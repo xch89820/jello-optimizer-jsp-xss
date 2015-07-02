@@ -20,7 +20,7 @@ npm install -g jello-optimizer-jsp-xss
 启用插件
 
 ```javascript
-fis.config.set('modules.optimizer.vm', 'jsp-xss');
+fis.config.set('modules.optimizer.jsp', 'jsp-xss');
 
 ```
 

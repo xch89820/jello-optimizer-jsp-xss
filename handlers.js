@@ -4,6 +4,12 @@
  */
 var _ = require('underscore');
 var handlers = {};
+var shorthandClose = [
+    'base',
+    'br',
+    'input',
+    'link'
+];
 
 /**
  * Escape pure text
@@ -45,7 +51,7 @@ var inhitBlacklist = function (blacklist, name){
 
 // Detect tags
 var is_jstlTag = function(name){
-    return !!/^[a-zA-z]:/.test(name);
+    return !!/^[a-zA-Z]+:/.test(name);
 };
 // is jsp or taglib tags
 var is_jspTag = function(name){
@@ -127,11 +133,21 @@ handlers.tag =  function (node, blacklist) {
         });
     }
 
-    if (node.children && node.children.length) {
-        begin += '>';
-        end = '</' + node.name + '>';
-    }else{
-        begin += '/>';
+    if (isJstlTag) {
+        if (node.children && node.children.length) {
+            begin += '>';
+            end = '</' + node.name + '>';
+        }else{
+            begin += ' />';
+        }
+    }else {
+        // HTML
+        if (_.contains(shorthandClose, node.name)) {
+            begin += ' />';
+        } else {
+            begin += '>';
+            end = '</' + node.name + '>';
+        }
     }
 
     return {

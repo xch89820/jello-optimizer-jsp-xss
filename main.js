@@ -1,8 +1,7 @@
 var XssJsp = require('./xssjsp.js');
-var parser = require('../parser.js');
+var parser = require('./parser.js');
 
 module.exports = function(content, file, settings) {
-
     var xss = new XssJsp(settings);
 
     var dom = parser.parser(content, settings);
