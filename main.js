@@ -1,3 +1,5 @@
+#!/usr/bin/env node
+
 var XssJsp = require('./xssjsp.js');
 var parser = require('./parser.js');
 
