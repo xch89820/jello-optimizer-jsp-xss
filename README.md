@@ -35,7 +35,7 @@ jello release -o
 *  `blacklist` 。数组格式，元素为正则对象,。用于规定哪些变量不转换。
 
 ```javascript
-fis.config.set('settings.optimizer.velocity-xss', {
+fis.config.set('settings.optimizer.jsp-xss', {
   blacklist: [
     /^foo/i, // foo 打头的变量不进行转换。
   ]
